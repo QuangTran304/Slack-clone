@@ -12,8 +12,15 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import SidebarOption from './SidebarOption';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { db } from '../firebase';
+import { collection } from 'firebase/firestore';
 
 const Sidebar = () => {
+  const [channels, loading, error] = useCollection(collection(db, 'rooms'));
+
+  console.log(channels);
+
   return (
     <SidebarContainer>
       <SidebarHeader>
@@ -44,6 +51,10 @@ const Sidebar = () => {
       <hr />
 
       <SidebarOption Icon={AddIcon} addChannelOption title='Add Channel' />
+
+      {channels?.docs.map((doc) => (
+        <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
+      ))}
     </SidebarContainer>
   );
 };

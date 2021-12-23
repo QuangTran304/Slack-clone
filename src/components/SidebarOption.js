@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
-const SidebarOption = ({ Icon, title, addChannelOption }) => {
+const SidebarOption = ({ Icon, title, addChannelOption, id }) => {
   const addChannel = () => {
     const channelName = prompt('Enter a channel name');
 
@@ -10,8 +10,6 @@ const SidebarOption = ({ Icon, title, addChannelOption }) => {
       const colRef = collection(db, 'rooms');
       addDoc(colRef, {
         name: channelName,
-      }).then(() => {
-        console.log('Channel added');
       });
     }
   };
@@ -58,4 +56,7 @@ const SidebarOptionContainer = styled.div`
   }
 `;
 
-const SidebarOptionChannel = styled.div``;
+const SidebarOptionChannel = styled.h3`
+  padding: 10px 0;
+  font-weight: 300;
+`;
