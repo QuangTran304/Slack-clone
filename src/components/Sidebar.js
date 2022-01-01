@@ -19,7 +19,12 @@ import { collection } from 'firebase/firestore';
 const Sidebar = () => {
   const [channels, loading, error] = useCollection(collection(db, 'rooms'));
 
-  console.log(channels);
+  const renderChannels = () => {
+    return channels?.docs.map((doc) => (
+      <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
+    ));
+  };
+  // console.log(channels);
 
   return (
     <SidebarContainer>
@@ -52,9 +57,7 @@ const Sidebar = () => {
 
       <SidebarOption Icon={AddIcon} addChannelOption title='Add Channel' />
 
-      {channels?.docs.map((doc) => (
-        <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
-      ))}
+      {renderChannels()}
     </SidebarContainer>
   );
 };

@@ -4,18 +4,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import Chat from './components/Chat';
 
 function App() {
   return (
     <BrowserRouter>
-      <>
-        <Header />
+      <Header />
 
-        <AppBody>
-          <Sidebar />
-          <Routes>{/* <Route path='/' element={ } */}</Routes>
-        </AppBody>
-      </>
+      <AppBody>
+        <Sidebar />
+        <Routes>
+          <Route path='/' element={<Chat />} />
+        </Routes>
+      </AppBody>
     </BrowserRouter>
   );
 }
