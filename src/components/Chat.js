@@ -5,19 +5,23 @@ import { useSelector } from 'react-redux';
 import { selectRoomId } from '../features/appSlice';
 import ChatInput from './ChatInput';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
-import { collection, doc, orderBy, query } from 'firebase/firestore';
+import { collection, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 import Message from './Message';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 const Chat = () => {
+  const chatRef = useRef(null);
   const roomId = useSelector(selectRoomId);
-
   const [roomDetails] = useDocument(roomId && doc(db, `rooms/${roomId}`));
-
-  const messagesCollection = collection(db, `rooms/${roomId}/messages`);
-  const [roomMessages] = useCollection(
-    roomId && query(messagesCollection, orderBy('timestamp', 'desc'))
+  const [roomMessages, loading] = useCollection(
+    roomId && collection(db, `rooms/${roomId}/messages`)
   );
+
+  useEffect(() => {
+    chatRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [roomId, loading]);
 
   const renderMessages = () => {
     if (!roomMessages) {
@@ -56,7 +60,12 @@ const Chat = () => {
         </HeaderRight>
       </Header>
 
-      <ChatMessages>{renderMessages()}</ChatMessages>
+      <ChatMessages>
+        {renderMessages()}
+
+        {/* All this component does is to scroll to the bottom of the chat */}
+        <ChatBottom ref={chatRef} />
+      </ChatMessages>
 
       <ChatInput channelName={roomDetails?.data().name} channelId={roomId} />
     </ChatContainer>
@@ -65,6 +74,10 @@ const Chat = () => {
 
 export default Chat;
 
+const ChatBottom = styled.div`
+  padding-bottom: 160px;
+`;
+
 const ChatMessages = styled.div``;
 
 const Header = styled.div`
@@ -72,6 +85,7 @@ const Header = styled.div`
   justify-content: space-between;
   padding: 20px;
   border-bottom: 1px solid lightgray;
+  box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.25);
 `;
 const HeaderLeft = styled.div`
   display: flex;

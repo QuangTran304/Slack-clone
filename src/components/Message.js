@@ -29,17 +29,21 @@ const MessageContainer = styled.div`
     border-radius: 8px;
     border: 1px solid lightgray;
     margin-right: 5px;
-    /* box-shadow: 0px 2px 10px 5px rgba(0, 0, 0, 0.25); */
   }
 `;
 
 const MessageInfo = styled.div`
   padding-left: 10px;
 
+  > h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
   > h4 > span {
     color: gray;
     font-weight: 300;
-    margin-left: 4px;
-    font-size: 12px;
+    margin-left: 10px;
+    font-size: 11px;
   }
 `;
