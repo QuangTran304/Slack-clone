@@ -1,12 +1,15 @@
 import { Button } from '@mui/material';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import styled from 'styled-components';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 
 const ChatInput = ({ channelName, channelId, chatRef }) => {
   const [input, setInput] = useState('');
+  const [user] = useAuthState(auth);
 
+  console.log(user);
   const sendMessage = (event) => {
     event.preventDefault();
 
@@ -18,8 +21,8 @@ const ChatInput = ({ channelName, channelId, chatRef }) => {
     addDoc(messagesCollection, {
       message: input,
       timestamp: serverTimestamp(),
-      user: 'username',
-      userImage: 'https://i.pravatar.cc/300',
+      user: user.displayName,
+      userImage: user.photoURL,
     });
 
     // When sending the message, scroll into view (of latest message)

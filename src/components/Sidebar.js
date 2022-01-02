@@ -13,11 +13,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import SidebarOption from './SidebarOption';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import { collection } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Sidebar = () => {
-  const [channels, loading, error] = useCollection(collection(db, 'rooms'));
+  const [channels] = useCollection(collection(db, 'rooms'));
+  const [user] = useAuthState(auth);
 
   const renderChannels = () => {
     return channels?.docs.map((doc) => (
@@ -33,7 +35,7 @@ const Sidebar = () => {
           <h2>Paperonics Group</h2>
           <h3>
             <FiberManualRecordIcon />
-            Quang Tran
+            {user?.displayName}
           </h3>
         </SidebarInfo>
 

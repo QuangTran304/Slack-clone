@@ -7,13 +7,25 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Chat from './components/Chat';
 import Login from './components/Login';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function App() {
   const [user, loading] = useAuthState(auth);
 
   const renderMainApp = () => {
     if (loading) {
-      return <div>Loading...</div>;
+      // if (true) {  // FIXME: Just for testing the loading screen
+      return (
+        <AppLoading>
+          <AppLoadingContent>
+            <img
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Slack_Technologies_Logo.svg/498px-Slack_Technologies_Logo.svg.png'
+              alt='Slack logo'
+            />
+            <CircularProgress />
+          </AppLoadingContent>
+        </AppLoading>
+      );
     }
 
     if (!user) {
@@ -39,6 +51,27 @@ function App() {
 }
 
 export default App;
+
+const AppLoading = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+`;
+
+const AppLoadingContent = styled.div`
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > img {
+    height: 80px;
+    padding: 20px;
+    margin-bottom: 50px;
+  }
+`;
 
 const AppBody = styled.div`
   display: flex;
