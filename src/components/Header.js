@@ -2,13 +2,18 @@ import styled from 'styled-components';
 import Avatar from '@mui/material/Avatar';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SearchIcon from '@mui/icons-material/Search';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import Button from '@mui/material/Button';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
 const Header = () => {
+  const [user] = useAuthState(auth);
+
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderAvatar />
+        <HeaderAvatar alt={user?.displayName} src={user?.photoURL} />
         <AccessTimeIcon />
       </HeaderLeft>
 
@@ -18,7 +23,14 @@ const Header = () => {
       </HeaderSearch>
 
       <HeaderRight>
-        <HelpOutlineIcon />
+        <Button
+          variant='contained'
+          color='secondary'
+          endIcon={<ExitToAppIcon />}
+          onClick={() => auth.signOut()}
+        >
+          Sign Out
+        </Button>
       </HeaderRight>
     </HeaderContainer>
   );
@@ -83,7 +95,7 @@ const HeaderRight = styled.div`
   display: flex;
   align-items: flex-end;
 
-  > .MuiSvgIcon-root {
+  > Button {
     margin-left: auto;
     margin-right: 20px;
   }
