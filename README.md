@@ -1,6 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Slack clone
 
-## Available Scripts
+This Slack clone app allows users register & create chat rooms as well as participate in group chat in real-time. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/).
+
+## Other libraries used
+
+- Material UI
+- Styled Components
+- React-Redux
+- React-Firebase-Hooks
+
+## App Screenshots
+
+Main app screen:
+<img src='App screen.png' width='800'>
+
+Sign In screen:
+<img src='SignIn screen.png' width='800'>
+
+## Available scripts in project
 
 In the project directory, you can run:
 
