@@ -30,10 +30,10 @@ const Sidebar = () => {
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>Info H2</h2>
+          <h2>Paperonics Group</h2>
           <h3>
             <FiberManualRecordIcon />
-            Testing string
+            Quang Tran
           </h3>
         </SidebarInfo>
 
@@ -66,7 +66,7 @@ export default Sidebar;
 
 const SidebarContainer = styled.div`
   color: white;
-  background-color: var(--slack-color);
+  background-color: var(--slack-accent-color);
   flex: 0.3;
   border-top: 1px solid #49274b;
   max-width: 260px;

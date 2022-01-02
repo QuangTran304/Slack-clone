@@ -36,7 +36,7 @@ const MessageInfo = styled.div`
   padding-left: 10px;
 
   > h4 {
-    font-size: 1rem;
+    font-size: 15px;
     margin-bottom: 5px;
   }
 

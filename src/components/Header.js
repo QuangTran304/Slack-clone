@@ -61,7 +61,7 @@ const HeaderSearch = styled.div`
   flex: 0.4;
   opacity: 1;
   border-radius: 6px;
-  background-color: #421f44;
+  background-color: var(--slack-accent-color);
   text-align: center;
   display: flex;
   padding: 0 50px;
